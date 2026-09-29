@@ -59,23 +59,14 @@ npm run build
 
 The static site is generated in `out/`.
 
-### CI/CD (GitHub Actions → Vercel)
+### CI/CD
 
-`.github/workflows/ci-cd.yml` runs on every push and pull request to `main` or `dev`:
+- **CI (GitHub Actions)**: `.github/workflows/ci.yml` runs `npm ci`, `npm run lint` and `npm run build` (the build also type-checks) on every push and pull request to `main` or `dev`.
+- **CD (Vercel Git integration)**: the Vercel project `code-guru-portfolio` is connected to this repository and deploys every push automatically:
+  - `main` → **Production**: <https://code-guru-portfolio.vercel.app>
+  - `dev` and pull requests → **Preview** (Vercel comments the preview link on each PR)
 
-1. **Lint & build**: `npm ci`, `npm run lint`, `npm run build` (the build also type-checks).
-2. **Deploy to Vercel** (only after step 1 passes):
-   - push to `main` → **Production**
-   - push to `dev` → **Preview**
-   - pull request → **Preview**, with the URL posted as a PR comment
-
-The workflow needs one repository secret, `VERCEL_TOKEN`. Create a token at <https://vercel.com/account/tokens>, then add it under **Settings → Secrets and variables → Actions**, or run:
-
-```bash
-gh secret set VERCEL_TOKEN --repo RVNethmina/Codu-Guru-Portfolio-Website
-```
-
-The Vercel project (`code-guru-portfolio`) is not connected to Git on purpose: GitHub Actions is the only thing that deploys, so pushes never trigger duplicate builds.
+To release to production, merge `dev` into `main`.
 
 ## Team
 
