@@ -31,10 +31,9 @@ src/data/site.ts
 
 | What | Where in `site.ts` |
 | --- | --- |
-| Document / presentation download links | `documents` and `presentations` — paste a Google Drive / OneDrive share link into `url` (or each `files[].url`). Empty links show as "Coming soon". |
+| Deliverables (documents & presentations) | `documents` and `presentations` — listed for reference only. Add a `url` to an entry to show a **Download** button; only the research paper has one. |
 | Milestone dates and status | `milestones` — set `date` and `status` (`completed`, `current`, `upcoming`). |
-| Team photos, LinkedIn, GitHub | `members` / `supervisors` — add `photo` (put the image in `public/team/`), `linkedin`, `github`. |
-| Research paper link | `links.paper` |
+| Team photos, LinkedIn, GitHub | `members` / `supervisors` — add `photo` (a small square image, ~480×480, in `public/team/`), `linkedin`, `github`. Strip photo metadata first: phone photos can contain GPS location. |
 
 ## Project structure
 
@@ -73,6 +72,6 @@ To release to production, merge `dev` into `main`.
 - W. P. R. Nethmina (Group Leader) — Code Coach
 - H. A. S. I. Madurapperuma — Study Guider
 - M. N. H. Appuhami — PairPath
-- J. Aaron Charles — Adaptive Gamification Engine
+- J. Aron Charles — Adaptive Gamification Engine
 
 Supervisor: Ms. Suriyaa Kumari · Co-Supervisor: Ms. Uthpala Samarakoon

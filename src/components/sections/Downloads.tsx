@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { Check, Clock, Copy, Download, ExternalLink, FileText, FolderDown, Globe, Package, Presentation } from "lucide-react";
+import { CalendarDays, Check, Clock, Copy, Download, FileText, FolderDown, Globe, Package, Presentation } from "lucide-react";
 import clsx from "clsx";
 import { useState } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -127,9 +127,10 @@ function ProductCards() {
   );
 }
 
+/** Deliverables are listed for reference; only entries with a `url` (the research paper) can be downloaded. */
 function DeliverableCard({ d, index }: { d: Deliverable; index: number }) {
   const Icon = d.kind === "PPTX" ? Presentation : FileText;
-  const ready = Boolean(d.url) || Boolean(d.files?.some((f) => f.url));
+  const downloadable = Boolean(d.url);
   return (
     <motion.article
       layout
@@ -138,10 +139,20 @@ function DeliverableCard({ d, index }: { d: Deliverable; index: number }) {
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
       whileHover={{ y: -6 }}
-      className="group relative flex flex-col rounded-2xl border border-line bg-surface/70 p-5 transition-colors hover:border-violet/40"
+      className={clsx(
+        "group relative flex flex-col rounded-2xl border p-5 transition-colors",
+        downloadable
+          ? "border-sky/40 bg-gradient-to-b from-sky/10 to-surface/70 shadow-[0_0_30px_rgba(14,165,233,0.12)] hover:border-sky/70"
+          : "border-line bg-surface/70 hover:border-violet/40",
+      )}
     >
       <div className="flex items-start justify-between">
-        <span className="grid size-12 place-items-center rounded-xl bg-indigo/15 text-indigo-300 transition group-hover:scale-110 group-hover:rotate-[-6deg]">
+        <span
+          className={clsx(
+            "grid size-12 place-items-center rounded-xl transition group-hover:scale-110 group-hover:rotate-[-6deg]",
+            downloadable ? "bg-sky/15 text-sky-300" : "bg-indigo/15 text-indigo-300",
+          )}
+        >
           <Icon className="size-6" />
         </span>
         <span className="rounded-md border border-white/10 px-2 py-0.5 font-mono text-[10.5px] font-bold text-slate-300">{d.kind}</span>
@@ -149,42 +160,43 @@ function DeliverableCard({ d, index }: { d: Deliverable; index: number }) {
       <h4 className="mt-4 font-display text-lg font-bold text-white">{d.title}</h4>
       <p className="mt-1.5 flex-1 text-[13px] leading-relaxed text-slate-500">{d.description}</p>
 
-      {d.files ? (
+      {d.files && (
         <ul className="mt-4 space-y-1.5 border-t border-white/5 pt-3">
           {d.files.map((f) => (
-            <li key={f.label} className="flex items-center justify-between gap-2 text-[12.5px]">
-              <span className="truncate text-slate-400">{f.label}</span>
-              {f.url ? (
-                <a href={f.url} target="_blank" rel="noreferrer" className="text-sky hover:text-white" aria-label={`Open ${f.label}`}>
+            <li key={f.label} className="flex items-center gap-2 text-[12.5px] text-slate-400">
+              <span className="size-1.5 shrink-0 rounded-full bg-indigo/60" />
+              <span className="truncate">{f.label}</span>
+              {f.url && (
+                <a href={f.url} target="_blank" rel="noreferrer" className="ml-auto text-sky hover:text-white" aria-label={`Download ${f.label}`}>
                   <Download className="size-4" />
                 </a>
-              ) : (
-                <Clock className="size-3.5 text-slate-600" />
               )}
             </li>
           ))}
         </ul>
-      ) : null}
+      )}
 
-      <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
-        <span className="flex items-center gap-1.5 text-xs text-slate-500">
-          <span className={clsx("size-1.5 rounded-full", ready ? "bg-emerald-400" : "bg-slate-600")} />
-          {d.date ?? (ready ? "Available" : "Coming soon")}
-        </span>
-        {d.url ? (
-          <a
-            href={d.url}
-            target="_blank"
-            rel="noreferrer"
-            className="grid size-9 place-items-center rounded-lg bg-white/5 text-slate-300 transition hover:bg-violet hover:text-white"
-            aria-label={`Open ${d.title}`}
-          >
-            <ExternalLink className="size-4" />
-          </a>
-        ) : !d.files ? (
-          <span className="rounded-md bg-white/5 px-2 py-1 text-[11px] text-slate-500">Coming soon</span>
-        ) : null}
-      </div>
+      {(d.date || d.url) && (
+        <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/5 pt-3">
+          {d.date ? (
+            <span className="flex items-center gap-1.5 text-xs text-slate-500">
+              <CalendarDays className="size-3.5" /> {d.date}
+            </span>
+          ) : (
+            <span />
+          )}
+          {d.url && (
+            <a
+              href={d.url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-sky px-3 py-1.5 text-xs font-semibold text-ink transition hover:shadow-[0_0_20px_rgba(14,165,233,0.6)]"
+            >
+              <Download className="size-3.5" /> Download
+            </a>
+          )}
+        </div>
+      )}
     </motion.article>
   );
 }
@@ -206,7 +218,7 @@ export function Downloads() {
               Downloads &amp; <span className="text-gradient">Resources</span>
             </>
           }
-          lead="Try the tools we built, and access the documents and presentations behind the research."
+          lead="Try the tools we built and explore the documents and presentations behind the research."
         />
 
         <ProductCards />
@@ -261,7 +273,7 @@ export function Downloads() {
                     <Clock className="size-6" />
                   </motion.span>
                   <p className="mt-3 font-display font-semibold text-slate-300">More on the way</p>
-                  <p className="mt-1 max-w-[220px] text-xs text-slate-500">Deliverables are published here as each milestone is completed.</p>
+                  <p className="mt-1 max-w-[220px] text-xs text-slate-500">New deliverables are added here as each milestone is completed.</p>
                 </motion.div>
               )}
             </AnimatePresence>
