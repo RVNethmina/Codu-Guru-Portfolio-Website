@@ -27,8 +27,6 @@ export const links = {
   extensionVersion: "0.2.1",
   extensionReleases: "https://github.com/R26-SE-036/code-coach/releases",
   github: "https://github.com/R26-SE-036",
-  // Set this once the research paper is publicly available (e.g. IEEE Xplore / Drive link).
-  paper: "",
 };
 
 export const heroWords = ["hint.", "lesson.", "challenge.", "pair session."];
@@ -207,7 +205,7 @@ export const components: Component[] = [
     id: "gamification",
     name: "Adaptive Gamification",
     tagline: "Practice at the edge of ability",
-    owner: "J. Aaron Charles",
+    owner: "J. Aron Charles",
     regNo: "IT22203380",
     description:
       "Three game modules — Drag & Drop Code, Bug Hunt and Pair Challenge — adapt game type and difficulty from seven performance indicators through a transparent rule-based engine that educators can inspect and trust.",
@@ -334,20 +332,20 @@ export const milestones: Milestone[] = [
 
 /* ---------- Downloads ---------- */
 
-export type DocLink = { label: string; url: string };
+export type DocLink = { label: string; url?: string };
 
 export type Deliverable = {
   title: string;
   kind: "PDF" | "PPTX" | "DOCX" | "XLSX";
   date?: string;
   description: string;
-  url?: string; // single file
-  files?: DocLink[]; // several files (e.g. one per member)
+  url?: string; // set only for documents visitors may download (shows a Download button)
+  files?: DocLink[]; // several parts, e.g. one per member
 };
 
 /**
- * Paste Google Drive / OneDrive share links into `url` (or each `files[].url`).
- * Anything left empty shows as "Coming soon".
+ * Deliverables are listed for reference only. Add a `url` to an entry to make it
+ * downloadable — currently only the research paper.
  */
 export const documents: Deliverable[] = [
   {
@@ -355,7 +353,6 @@ export const documents: Deliverable[] = [
     kind: "PDF",
     date: "Jan 2026",
     description: "Research problem, existing systems, proposed solution and objectives.",
-    url: "",
   },
   {
     title: "Project Proposals",
@@ -363,54 +360,51 @@ export const documents: Deliverable[] = [
     date: "Mar 2026",
     description: "Individual proposal reports for each component.",
     files: [
-      { label: "Code Coach — Nethmina", url: "" },
-      { label: "Study Guider — Madurapperuma", url: "" },
-      { label: "PairPath — Appuhami", url: "" },
-      { label: "Gamification — Aaron Charles", url: "" },
+      { label: "Code Coach — Nethmina" },
+      { label: "Study Guider — Madurapperuma" },
+      { label: "PairPath — Appuhami" },
+      { label: "Gamification — Aron Charles" },
     ],
   },
   {
     title: "Research Paper",
     kind: "PDF",
     description: "Code Guru: An Integrated Real-Time Learning Support Platform for Novice Java Programmers.",
-    url: "",
+    url: "/docs/Code-Guru-Research-Paper.pdf",
   },
   {
     title: "Final Thesis (Group)",
     kind: "PDF",
     description: "The complete group thesis for the Code Guru platform.",
-    url: "",
   },
   {
     title: "Individual Theses",
     kind: "PDF",
     description: "One thesis per component, written by each member.",
     files: [
-      { label: "Code Coach — Nethmina", url: "" },
-      { label: "Study Guider — Madurapperuma", url: "" },
-      { label: "PairPath — Appuhami", url: "" },
-      { label: "Gamification — Aaron Charles", url: "" },
+      { label: "Code Coach — Nethmina" },
+      { label: "Study Guider — Madurapperuma" },
+      { label: "PairPath — Appuhami" },
+      { label: "Gamification — Aron Charles" },
     ],
   },
   {
     title: "Final Logbook",
     kind: "PDF",
     description: "Supervisor meetings, decisions and weekly progress.",
-    url: "",
   },
   {
     title: "Final Report",
     kind: "PDF",
     description: "Final report on the integrated platform and evaluation.",
-    url: "",
   },
 ];
 
 export const presentations: Deliverable[] = [
-  { title: "Proposal Presentation", kind: "PPTX", description: "Problem, gap, objectives and proposed solution.", url: "" },
-  { title: "Progress Presentation 1", kind: "PPTX", description: "Architecture, datasets and early prototypes.", url: "" },
-  { title: "Progress Presentation 2", kind: "PPTX", description: "Integrated platform and evaluation results.", url: "" },
-  { title: "Final Presentation", kind: "PPTX", description: "Final defence and live demonstration.", url: "" },
+  { title: "Proposal Presentation", kind: "PPTX", description: "Problem, gap, objectives and proposed solution." },
+  { title: "Progress Presentation 1", kind: "PPTX", description: "Architecture, datasets and early prototypes." },
+  { title: "Progress Presentation 2", kind: "PPTX", description: "Integrated platform and evaluation results." },
+  { title: "Final Presentation", kind: "PPTX", description: "Final defence and live demonstration." },
 ];
 
 /* ---------- Team ---------- */
@@ -450,6 +444,7 @@ export const members: Person[] = [
     regNo: "IT22253958",
     email: "it22253958@my.sliit.lk",
     github: "https://github.com/RVNethmina",
+    photo: "/team/nethmina.jpg",
   },
   {
     name: "H. A. S. I. Madurapperuma",
@@ -457,6 +452,7 @@ export const members: Person[] = [
     focus: "Study Guider",
     regNo: "IT22230942",
     email: "it22230942@my.sliit.lk",
+    github: "https://github.com/NimeshHasaranga",
   },
   {
     name: "M. N. H. Appuhami",
@@ -464,13 +460,15 @@ export const members: Person[] = [
     focus: "PairPath",
     regNo: "IT22140852",
     email: "it22140852@my.sliit.lk",
+    github: "https://github.com/Shanuka095",
   },
   {
-    name: "J. Aaron Charles",
+    name: "J. Aron Charles",
     role: "Member",
     focus: "Adaptive Gamification",
     regNo: "IT22203380",
     email: "it22203380@my.sliit.lk",
+    github: "https://github.com/Aron-charles",
   },
 ];
 
