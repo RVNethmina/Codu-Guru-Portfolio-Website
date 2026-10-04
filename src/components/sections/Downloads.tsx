@@ -188,8 +188,8 @@ function DeliverableCard({ d, index }: { d: Deliverable; index: number }) {
           {d.url && (
             <a
               href={d.url}
-              target="_blank"
-              rel="noreferrer"
+              // Files hosted on this site download directly; external links open in a new tab.
+              {...(d.url.startsWith("/") ? { download: "" } : { target: "_blank", rel: "noreferrer" })}
               className="inline-flex items-center gap-1.5 rounded-lg bg-sky px-3 py-1.5 text-xs font-semibold text-ink transition hover:shadow-[0_0_20px_rgba(14,165,233,0.6)]"
             >
               <Download className="size-3.5" /> Download

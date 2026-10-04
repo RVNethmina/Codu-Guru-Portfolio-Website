@@ -370,7 +370,7 @@ export const documents: Deliverable[] = [
     title: "Research Paper",
     kind: "PDF",
     description: "Code Guru: An Integrated Real-Time Learning Support Platform for Novice Java Programmers.",
-    url: "https://mysliit-my.sharepoint.com/:b:/g/personal/it22253958_my_sliit_lk/IQAsjdVinLOyRKwWzbDTsYxAAey-OJqlaX9YvePU1mTxfRg?e=vxHYaD",
+    url: "/docs/Code-Guru-Research-Paper.pdf",
   },
   {
     title: "Final Thesis (Group)",
