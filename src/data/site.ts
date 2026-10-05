@@ -20,11 +20,11 @@ export const project = {
 };
 
 export const links = {
-  webApp: "https://13-202-201-115.sslip.io/",
+  webApp: "https://3-106-2-190.sslip.io/",
   extension: "https://marketplace.visualstudio.com/items?itemName=codeguru-sliit.code-coach-vscode",
   extensionId: "codeguru-sliit.code-coach-vscode",
   extensionName: "Code Guru: Code Coach",
-  extensionVersion: "0.2.1",
+  extensionVersion: "0.2.2",
   extensionReleases: "https://github.com/R26-SE-036/code-coach/releases",
   github: "https://github.com/R26-SE-036",
 };
