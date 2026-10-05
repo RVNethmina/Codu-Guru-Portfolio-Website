@@ -2,7 +2,7 @@
 
 Portfolio website for **Code Guru** (R26-SE-036), an integrated real-time learning support platform for novice Java programmers — a final-year research project at the Sri Lanka Institute of Information Technology (SLIIT).
 
-- Web platform: <https://13-202-201-115.sslip.io/>
+- Web platform: <https://3-106-2-190.sslip.io/>
 - VS Code extension: [Code Guru: Code Coach](https://marketplace.visualstudio.com/items?itemName=codeguru-sliit.code-coach-vscode)
 
 ## Tech stack
