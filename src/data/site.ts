@@ -260,7 +260,7 @@ export type Milestone = {
 
 export const milestones: Milestone[] = [
   {
-    title: "Topic Assessment",
+    title: "Topic Assessment Form (TAF)",
     date: "January 2026",
     description: "Topic Assessment Form submitted and approved — the research problem, gap and four sub-objectives defined.",
     type: "Group",
@@ -274,14 +274,28 @@ export const milestones: Milestone[] = [
     status: "completed",
   },
   {
+    title: "Checklist 1 Submission",
+    description: "First research checklist submitted, confirming the agreed scope, plan and early progress.",
+    type: "Group",
+    status: "completed",
+  },
+  {
     title: "Progress Presentation 1",
+    date: "June 2026",
     description: "First progress review: architecture, datasets and early prototypes of each component.",
     type: "Group",
     status: "completed",
   },
   {
     title: "Progress Presentation 2",
+    date: "August 2026",
     description: "Second progress review: integrated platform, trained models and evaluation results.",
+    type: "Group",
+    status: "completed",
+  },
+  {
+    title: "Checklist 2 Submission",
+    description: "Second research checklist submitted, tracking progress against the plan after PP2.",
     type: "Group",
     status: "completed",
   },
@@ -298,6 +312,19 @@ export const milestones: Milestone[] = [
     status: "completed",
   },
   {
+    title: "Code Guru Web Application Deployment",
+    description: "The Code Guru web platform deployed and live for learners, linking insights, lessons, practice and pairing.",
+    type: "Group",
+    status: "completed",
+  },
+  {
+    title: "Draft Thesis Submission",
+    date: "October 2026",
+    description: "Draft group thesis and individual theses submitted for supervisor review.",
+    type: "Group",
+    status: "completed",
+  },
+  {
     title: "Research Portfolio Website",
     date: "September 2026",
     description: "This website — showcasing the research, milestones, team and deliverables.",
@@ -305,26 +332,38 @@ export const milestones: Milestone[] = [
     status: "current",
   },
   {
-    title: "Final Thesis",
-    description: "Group thesis and four individual theses covering each component in full.",
-    type: "Group",
-    status: "upcoming",
-  },
-  {
-    title: "Final Logbook",
-    description: "Complete record of supervisor meetings, decisions and weekly progress.",
-    type: "Individual",
-    status: "upcoming",
-  },
-  {
-    title: "Final Report",
-    description: "Final report on the integrated platform and its evaluation.",
+    title: "Final Checklist",
+    description: "Final research checklist confirming every deliverable is complete before the final evaluation.",
     type: "Group",
     status: "upcoming",
   },
   {
     title: "Final Presentation & Viva",
     description: "Final defence and live demonstration of Code Guru to the evaluation panel.",
+    type: "Group",
+    status: "upcoming",
+  },
+  {
+    title: "Website Evaluation & Logbook Submission",
+    description: "Evaluation of this portfolio website and submission of the logbooks recording supervisor meetings and weekly progress.",
+    type: "Group",
+    status: "upcoming",
+  },
+  {
+    title: "Research Paper Submission",
+    description: "The research paper submitted to a conference or journal for peer review.",
+    type: "Group",
+    status: "upcoming",
+  },
+  {
+    title: "Final Thesis Submission",
+    description: "Final group thesis and four individual theses submitted, updated with the panel's feedback.",
+    type: "Group",
+    status: "upcoming",
+  },
+  {
+    title: "Research Paper Publication Evidence",
+    description: "Evidence of the research paper's acceptance or publication submitted to complete the project.",
     type: "Group",
     status: "upcoming",
   },
@@ -399,11 +438,6 @@ export const documents: Deliverable[] = [
     title: "Final Logbook",
     kind: "PDF",
     description: "Supervisor meetings, decisions and weekly progress.",
-  },
-  {
-    title: "Final Report",
-    kind: "PDF",
-    description: "Final report on the integrated platform and evaluation.",
   },
 ];
 
