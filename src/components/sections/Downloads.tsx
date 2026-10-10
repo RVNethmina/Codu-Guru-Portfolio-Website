@@ -248,7 +248,7 @@ export function Downloads() {
           <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-center">
             <div>
               <h3 className="font-display text-2xl font-bold text-white">Academic Deliverables</h3>
-              <p className="mt-1 text-slate-400">Proposals, research paper, theses, logbook, final report and presentations — open any of them to read on the site.</p>
+              <p className="mt-1 text-slate-400">Proposals, research paper, theses, logbook and presentations — open any of them to read on the site.</p>
             </div>
             <div className="flex rounded-full border border-line bg-ink/60 p-1">
               {(

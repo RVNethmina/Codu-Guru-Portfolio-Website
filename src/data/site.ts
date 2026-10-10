@@ -439,11 +439,6 @@ export const documents: Deliverable[] = [
     kind: "PDF",
     description: "Supervisor meetings, decisions and weekly progress.",
   },
-  {
-    title: "Final Report",
-    kind: "PDF",
-    description: "Final report on the integrated platform and evaluation.",
-  },
 ];
 
 export const presentations: Deliverable[] = [
