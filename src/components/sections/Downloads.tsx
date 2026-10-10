@@ -1,12 +1,13 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { CalendarDays, Check, Clock, Copy, Download, FileText, FolderDown, Globe, Package, Presentation } from "lucide-react";
+import { CalendarDays, Check, Clock, Copy, Download, Eye, FileText, FolderDown, Globe, Package, Presentation } from "lucide-react";
 import clsx from "clsx";
 import { useState } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { VSCodeIcon, GithubIcon } from "@/components/ui/BrandIcons";
+import { DocViewer, hasPages } from "@/components/ui/DocViewer";
 import { documents, links, presentations, type Deliverable } from "@/data/site";
 
 function CopyCommand({ command }: { command: string }) {
@@ -127,10 +128,13 @@ function ProductCards() {
   );
 }
 
-/** Deliverables are listed for reference; only entries with a `url` (the research paper) can be downloaded. */
-function DeliverableCard({ d, index }: { d: Deliverable; index: number }) {
+type Viewing = { slug: string; title: string };
+
+/** Deliverables open in the read-only viewer; only entries with a `url` (the research paper) can be downloaded. */
+function DeliverableCard({ d, index, onView }: { d: Deliverable; index: number; onView: (v: Viewing) => void }) {
   const Icon = d.kind === "PPTX" ? Presentation : FileText;
   const downloadable = Boolean(d.url);
+  const viewable = hasPages(d.view) || Boolean(d.files?.some((f) => hasPages(f.view)));
   return (
     <motion.article
       layout
@@ -143,7 +147,9 @@ function DeliverableCard({ d, index }: { d: Deliverable; index: number }) {
         "group relative flex flex-col rounded-2xl border p-5 transition-colors",
         downloadable
           ? "border-sky/40 bg-gradient-to-b from-sky/10 to-surface/70 shadow-[0_0_30px_rgba(14,165,233,0.12)] hover:border-sky/70"
-          : "border-line bg-surface/70 hover:border-violet/40",
+          : viewable
+            ? "border-violet/30 bg-gradient-to-b from-violet/10 to-surface/70 hover:border-violet/60"
+            : "border-line bg-surface/70 hover:border-violet/40",
       )}
     >
       <div className="flex items-start justify-between">
@@ -164,19 +170,23 @@ function DeliverableCard({ d, index }: { d: Deliverable; index: number }) {
         <ul className="mt-4 space-y-1.5 border-t border-white/5 pt-3">
           {d.files.map((f) => (
             <li key={f.label} className="flex items-center gap-2 text-[12.5px] text-slate-400">
-              <span className="size-1.5 shrink-0 rounded-full bg-indigo/60" />
-              <span className="truncate">{f.label}</span>
-              {f.url && (
-                <a href={f.url} target="_blank" rel="noreferrer" className="ml-auto text-sky hover:text-white" aria-label={`Download ${f.label}`}>
-                  <Download className="size-4" />
-                </a>
+              <span className={clsx("size-1.5 shrink-0 rounded-full", hasPages(f.view) ? "bg-violet" : "bg-indigo/40")} />
+              <span className="min-w-0 leading-snug">{f.label}</span>
+              {hasPages(f.view) && (
+                <button
+                  onClick={() => onView({ slug: f.view!, title: `${d.title} — ${f.label}` })}
+                  className="ml-auto inline-flex shrink-0 items-center gap-1 rounded-md px-1.5 py-0.5 text-xs font-semibold text-violet-300 transition hover:bg-violet/15 hover:text-white"
+                  aria-label={`View ${f.label}`}
+                >
+                  <Eye className="size-3.5" /> View
+                </button>
               )}
             </li>
           ))}
         </ul>
       )}
 
-      {(d.date || d.url) && (
+      {(d.date || d.url || hasPages(d.view)) && (
         <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/5 pt-3">
           {d.date ? (
             <span className="flex items-center gap-1.5 text-xs text-slate-500">
@@ -185,16 +195,26 @@ function DeliverableCard({ d, index }: { d: Deliverable; index: number }) {
           ) : (
             <span />
           )}
-          {d.url && (
-            <a
-              href={d.url}
-              // Files hosted on this site download directly; external links open in a new tab.
-              {...(d.url.startsWith("/") ? { download: "" } : { target: "_blank", rel: "noreferrer" })}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-sky px-3 py-1.5 text-xs font-semibold text-ink transition hover:shadow-[0_0_20px_rgba(14,165,233,0.6)]"
-            >
-              <Download className="size-3.5" /> Download
-            </a>
-          )}
+          <div className="flex gap-2">
+            {hasPages(d.view) && (
+              <button
+                onClick={() => onView({ slug: d.view!, title: d.title })}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-violet/40 bg-violet/15 px-3 py-1.5 text-xs font-semibold text-violet-200 transition hover:bg-violet/30 hover:text-white"
+              >
+                <Eye className="size-3.5" /> View
+              </button>
+            )}
+            {d.url && (
+              <a
+                href={d.url}
+                // Files hosted on this site download directly; external links open in a new tab.
+                {...(d.url.startsWith("/") ? { download: "" } : { target: "_blank", rel: "noreferrer" })}
+                className="inline-flex items-center gap-1.5 rounded-lg bg-sky px-3 py-1.5 text-xs font-semibold text-ink transition hover:shadow-[0_0_20px_rgba(14,165,233,0.6)]"
+              >
+                <Download className="size-3.5" /> Download
+              </a>
+            )}
+          </div>
         </div>
       )}
     </motion.article>
@@ -204,6 +224,7 @@ function DeliverableCard({ d, index }: { d: Deliverable; index: number }) {
 export function Downloads() {
   const [tab, setTab] = useState<"documents" | "presentations">("documents");
   const list = tab === "documents" ? documents : presentations;
+  const [viewing, setViewing] = useState<Viewing | null>(null);
 
   return (
     <section id="downloads" className="relative overflow-hidden py-28">
@@ -227,7 +248,7 @@ export function Downloads() {
           <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-center">
             <div>
               <h3 className="font-display text-2xl font-bold text-white">Academic Deliverables</h3>
-              <p className="mt-1 text-slate-400">Proposals, research paper, theses, logbook, final report and presentations.</p>
+              <p className="mt-1 text-slate-400">Proposals, research paper, theses, logbook, final report and presentations — open any of them to read on the site.</p>
             </div>
             <div className="flex rounded-full border border-line bg-ink/60 p-1">
               {(
@@ -253,7 +274,7 @@ export function Downloads() {
           <motion.div layout className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <AnimatePresence mode="popLayout">
               {list.map((d, i) => (
-                <DeliverableCard key={`${tab}-${d.title}`} d={d} index={i} />
+                <DeliverableCard key={`${tab}-${d.title}`} d={d} index={i} onView={setViewing} />
               ))}
               {list.length % 4 !== 0 && (
                 <motion.div
@@ -280,6 +301,10 @@ export function Downloads() {
           </motion.div>
         </Reveal>
       </div>
+
+      <AnimatePresence>
+        {viewing && <DocViewer key={viewing.slug} slug={viewing.slug} title={viewing.title} onClose={() => setViewing(null)} />}
+      </AnimatePresence>
     </section>
   );
 }
