@@ -31,7 +31,7 @@ src/data/site.ts
 
 | What | Where in `site.ts` |
 | --- | --- |
-| Deliverables (documents & presentations) | `documents` and `presentations` — listed for reference only. Add a `url` to an entry to show a **Download** button; only the research paper has one. |
+| Deliverables (documents & presentations) | `documents` and `presentations`. Set `view` to a slug rendered by `scripts/render-viewer.py` to show a **View** button (read-only, see below). Add a `url` to show a **Download** button; only the research paper has one. |
 | Milestone dates and status | `milestones` — set `date` and `status` (`completed`, `current`, `upcoming`). |
 | Team photos, LinkedIn, GitHub | `members` / `supervisors` — add `photo` (a small square image, ~480×480, in `public/team/`), `linkedin`, `github`. Strip photo metadata first: phone photos can contain GPS location. |
 
@@ -58,7 +58,19 @@ npm run build
 
 The static site is generated in `out/`.
 
-### CI/CD
+### View-only documents
+
+Proposals, theses and presentations can be read on the site but not downloaded. The original files are kept in `private/`, which is git-ignored and never published (the repository is public). `scripts/render-viewer.py` renders each page to a WebP image in `public/viewer/<slug>/` and records the page counts in `src/data/viewer-pages.json`; the viewer only ever loads those images.
+
+To add or update a document:
+
+1. Put the PDF in `private/` (export slides with PowerPoint: *File → Save As → PDF*).
+2. Add it to `SOURCES` in `scripts/render-viewer.py`, then run `python scripts/render-viewer.py <slug>` (needs `pip install pymupdf pillow`).
+3. Set `view: "<slug>"` on the entry in `src/data/site.ts` (or on one of its `files`).
+
+Images can still be screenshotted, so this stops casual downloading rather than copying.
+
+## CI/CD
 
 - **CI (GitHub Actions)**: `.github/workflows/ci.yml` runs `npm ci`, `npm run lint` and `npm run build` (the build also type-checks) on every push and pull request to `main` or `dev`.
 - **CD (Vercel Git integration)**: the Vercel project `code-guru-portfolio` is connected to this repository and deploys every push automatically:

@@ -1,0 +1,52 @@
+{
+  "topic-assessment": {
+    "pages": 9,
+    "width": 1100,
+    "height": 1556
+  },
+  "proposal-nethmina": {
+    "pages": 45,
+    "width": 1100,
+    "height": 1556
+  },
+  "proposal-madurapperuma": {
+    "pages": 47,
+    "width": 1100,
+    "height": 1424
+  },
+  "proposal-aron": {
+    "pages": 34,
+    "width": 1100,
+    "height": 1556
+  },
+  "research-paper": {
+    "pages": 6,
+    "width": 1100,
+    "height": 1556
+  },
+  "thesis-group": {
+    "pages": 80,
+    "width": 1100,
+    "height": 1556
+  },
+  "thesis-nethmina": {
+    "pages": 84,
+    "width": 1100,
+    "height": 1556
+  },
+  "slides-proposal": {
+    "pages": 24,
+    "width": 1280,
+    "height": 720
+  },
+  "slides-pp1": {
+    "pages": 15,
+    "width": 1280,
+    "height": 720
+  },
+  "slides-pp2": {
+    "pages": 11,
+    "width": 1280,
+    "height": 720
+  }
+}

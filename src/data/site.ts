@@ -332,20 +332,22 @@ export const milestones: Milestone[] = [
 
 /* ---------- Downloads ---------- */
 
-export type DocLink = { label: string; url?: string };
+export type DocLink = { label: string; view?: string };
 
 export type Deliverable = {
   title: string;
   kind: "PDF" | "PPTX" | "DOCX" | "XLSX";
   date?: string;
   description: string;
+  view?: string; // slug of the page images in /public/viewer (shows a View button)
   url?: string; // set only for documents visitors may download (shows a Download button)
   files?: DocLink[]; // several parts, e.g. one per member
 };
 
 /**
- * Deliverables are listed for reference only. Add a `url` to an entry to make it
- * downloadable — currently only the research paper.
+ * Documents with a `view` slug open in the on-site viewer, which shows page images
+ * rendered by `scripts/render-viewer.py`; the original files are never published.
+ * Only entries with a `url` can be downloaded — currently just the research paper.
  */
 export const documents: Deliverable[] = [
   {
@@ -353,6 +355,7 @@ export const documents: Deliverable[] = [
     kind: "PDF",
     date: "Jan 2026",
     description: "Research problem, existing systems, proposed solution and objectives.",
+    view: "topic-assessment",
   },
   {
     title: "Project Proposals",
@@ -360,29 +363,33 @@ export const documents: Deliverable[] = [
     date: "Mar 2026",
     description: "Individual proposal reports for each component.",
     files: [
-      { label: "Code Coach — Nethmina" },
-      { label: "Study Guider — Madurapperuma" },
+      { label: "Code Coach — Nethmina", view: "proposal-nethmina" },
+      { label: "Study Guider — Madurapperuma", view: "proposal-madurapperuma" },
       { label: "PairPath — Appuhami" },
-      { label: "Gamification — Aron Charles" },
+      { label: "Gamification — Aron Charles", view: "proposal-aron" },
     ],
   },
   {
     title: "Research Paper",
     kind: "PDF",
     description: "Code Guru: An Integrated Real-Time Learning Support Platform for Novice Java Programmers.",
+    view: "research-paper",
     url: "/docs/Code-Guru-Research-Paper.pdf",
   },
   {
     title: "Final Thesis (Group)",
     kind: "PDF",
-    description: "The complete group thesis for the Code Guru platform.",
+    date: "Oct 2026",
+    description: "The common integrated solution report for the Code Guru platform.",
+    view: "thesis-group",
   },
   {
     title: "Individual Theses",
     kind: "PDF",
+    date: "Oct 2026",
     description: "One thesis per component, written by each member.",
     files: [
-      { label: "Code Coach — Nethmina" },
+      { label: "Code Coach — Nethmina", view: "thesis-nethmina" },
       { label: "Study Guider — Madurapperuma" },
       { label: "PairPath — Appuhami" },
       { label: "Gamification — Aron Charles" },
@@ -401,9 +408,21 @@ export const documents: Deliverable[] = [
 ];
 
 export const presentations: Deliverable[] = [
-  { title: "Proposal Presentation", kind: "PPTX", description: "Problem, gap, objectives and proposed solution." },
-  { title: "Progress Presentation 1", kind: "PPTX", description: "Architecture, datasets and early prototypes." },
-  { title: "Progress Presentation 2", kind: "PPTX", description: "Integrated platform and evaluation results." },
+  { title: "Proposal Presentation", kind: "PPTX", description: "Problem, gap, objectives and proposed solution.", view: "slides-proposal" },
+  {
+    title: "Progress Presentation 1",
+    kind: "PPTX",
+    date: "Jun 2026",
+    description: "Architecture, datasets and early prototypes.",
+    view: "slides-pp1",
+  },
+  {
+    title: "Progress Presentation 2",
+    kind: "PPTX",
+    date: "Aug 2026",
+    description: "Integrated platform and evaluation results.",
+    view: "slides-pp2",
+  },
   { title: "Final Presentation", kind: "PPTX", description: "Final defence and live demonstration." },
 ];
 
@@ -427,6 +446,7 @@ export const supervisors: Person[] = [
     role: "Supervisor",
     focus: "Department of Information Technology",
     email: "suriyaa.k@sliit.lk",
+    photo: "/team/suriyaa.jpg",
   },
   {
     name: "Ms. Uthpala Samarakoon",
@@ -453,6 +473,7 @@ export const members: Person[] = [
     regNo: "IT22230942",
     email: "it22230942@my.sliit.lk",
     github: "https://github.com/NimeshHasaranga",
+    photo: "/team/madurapperuma.jpg",
   },
   {
     name: "M. N. H. Appuhami",
@@ -461,6 +482,7 @@ export const members: Person[] = [
     regNo: "IT22140852",
     email: "it22140852@my.sliit.lk",
     github: "https://github.com/Shanuka095",
+    photo: "/team/appuhami.jpg",
   },
   {
     name: "J. Aron Charles",
@@ -469,6 +491,7 @@ export const members: Person[] = [
     regNo: "IT22203380",
     email: "it22203380@my.sliit.lk",
     github: "https://github.com/Aron-charles",
+    photo: "/team/aron.jpg",
   },
 ];
 
