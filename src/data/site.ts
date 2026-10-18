@@ -404,7 +404,7 @@ export const documents: Deliverable[] = [
     files: [
       { label: "Code Coach — Nethmina", view: "proposal-nethmina" },
       { label: "Study Guider — Madurapperuma", view: "proposal-madurapperuma" },
-      { label: "PairPath — Appuhami" },
+      { label: "PairPath — Appuhami", view: "proposal-appuhami" },
       { label: "Gamification — Aron Charles", view: "proposal-aron" },
     ],
   },
@@ -429,9 +429,9 @@ export const documents: Deliverable[] = [
     description: "One thesis per component, written by each member.",
     files: [
       { label: "Code Coach — Nethmina", view: "thesis-nethmina" },
-      { label: "Study Guider — Madurapperuma" },
-      { label: "PairPath — Appuhami" },
-      { label: "Gamification — Aron Charles" },
+      { label: "Study Guider — Madurapperuma", view: "thesis-madurapperuma" },
+      { label: "PairPath — Appuhami", view: "thesis-appuhami" },
+      { label: "Gamification — Aron Charles", view: "thesis-aron" },
     ],
   },
   {
@@ -487,6 +487,7 @@ export const supervisors: Person[] = [
     role: "Co-Supervisor",
     focus: "Department of Information Technology",
     email: "uthpala.s@sliit.lk",
+    photo: "/team/uthpala.jpg",
   },
 ];
 
@@ -501,22 +502,22 @@ export const members: Person[] = [
     photo: "/team/nethmina.jpg",
   },
   {
-    name: "H. A. S. I. Madurapperuma",
-    role: "Member",
-    focus: "Study Guider",
-    regNo: "IT22230942",
-    email: "it22230942@my.sliit.lk",
-    github: "https://github.com/NimeshHasaranga",
-    photo: "/team/madurapperuma.jpg",
-  },
-  {
     name: "M. N. H. Appuhami",
     role: "Member",
     focus: "PairPath",
     regNo: "IT22140852",
     email: "it22140852@my.sliit.lk",
-    github: "https://github.com/Shanuka095",
+    github: "https://github.com/NimeshHasaranga",
     photo: "/team/appuhami.jpg",
+  },
+  {
+    name: "H. A. S. I. Madurapperuma",
+    role: "Member",
+    focus: "Study Guider",
+    regNo: "IT22230942",
+    email: "it22230942@my.sliit.lk",
+    github: "https://github.com/Shanuka095",
+    photo: "/team/madurapperuma.jpg",
   },
   {
     name: "J. Aron Charles",
