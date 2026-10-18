@@ -404,7 +404,7 @@ export const documents: Deliverable[] = [
     files: [
       { label: "Code Coach — Nethmina", view: "proposal-nethmina" },
       { label: "Study Guider — Madurapperuma", view: "proposal-madurapperuma" },
-      { label: "PairPath — Appuhami" },
+      { label: "PairPath — Appuhami", view: "proposal-appuhami" },
       { label: "Gamification — Aron Charles", view: "proposal-aron" },
     ],
   },
@@ -429,9 +429,9 @@ export const documents: Deliverable[] = [
     description: "One thesis per component, written by each member.",
     files: [
       { label: "Code Coach — Nethmina", view: "thesis-nethmina" },
-      { label: "Study Guider — Madurapperuma" },
-      { label: "PairPath — Appuhami" },
-      { label: "Gamification — Aron Charles" },
+      { label: "Study Guider — Madurapperuma", view: "thesis-madurapperuma" },
+      { label: "PairPath — Appuhami", view: "thesis-appuhami" },
+      { label: "Gamification — Aron Charles", view: "thesis-aron" },
     ],
   },
   {
@@ -487,6 +487,7 @@ export const supervisors: Person[] = [
     role: "Co-Supervisor",
     focus: "Department of Information Technology",
     email: "uthpala.s@sliit.lk",
+    photo: "/team/uthpala.jpg",
   },
 ];
 

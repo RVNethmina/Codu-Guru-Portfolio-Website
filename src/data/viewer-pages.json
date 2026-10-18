@@ -9,6 +9,11 @@
     "width": 1100,
     "height": 1556
   },
+  "proposal-appuhami": {
+    "pages": 68,
+    "width": 1100,
+    "height": 1556
+  },
   "proposal-madurapperuma": {
     "pages": 47,
     "width": 1100,
@@ -31,6 +36,21 @@
   },
   "thesis-nethmina": {
     "pages": 84,
+    "width": 1100,
+    "height": 1556
+  },
+  "thesis-appuhami": {
+    "pages": 92,
+    "width": 1100,
+    "height": 1556
+  },
+  "thesis-madurapperuma": {
+    "pages": 86,
+    "width": 1100,
+    "height": 1556
+  },
+  "thesis-aron": {
+    "pages": 113,
     "width": 1100,
     "height": 1556
   },
